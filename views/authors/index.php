@@ -1,9 +1,22 @@
 <?php
-/* @var $this yii\web\View */
-?>
-<h1>authors/index</h1>
+/* @var $this yii\web\View
+ * @var $title
+ * @var ActiveDataProvider $dataProvider
+ */
 
-<p>
-    You may change the content of this page by modifying
-    the file <code><?= __FILE__; ?></code>.
-</p>
+use yii\data\ActiveDataProvider;
+use yii\grid\GridView;
+
+$this->title = $title;
+echo GridView::widget([
+    'dataProvider' => $dataProvider,
+    'columns' => [
+        ['class' => 'yii\grid\SerialColumn'],
+        'id',
+        'name',
+        [
+            'class' => 'yii\grid\ActionColumn',
+            'template' => '{view} {update} {delete}',
+        ],
+    ]
+]);

@@ -1,5 +1,8 @@
 <?php
-/* @var $this yii\web\View */
+/* @var $this yii\web\View
+ * @var $title string
+ */
+$this->title = $title;
 ?>
 <h1>books/index</h1>
 
@@ -7,3 +10,4 @@
     You may change the content of this page by modifying
     the file <code><?= __FILE__; ?></code>.
 </p>
+
