@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use yii\data\Sort;
 use yii\data\ActiveDataProvider;
 
 class BooksSearch extends Books

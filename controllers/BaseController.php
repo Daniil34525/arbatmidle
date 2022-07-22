@@ -13,7 +13,7 @@ abstract class BaseController extends Controller
     public $indexView;
     public $updateView;
 
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new $this->searchModelClass;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
