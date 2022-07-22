@@ -11,19 +11,18 @@ use yii\widgets\ActiveForm;
  */
 
 $this->title = $title;
-$view = false;
 ?>
 <div class="authors-create_update_view">
 
     <?php $form = ActiveForm::begin(); ?>
 
     <?php if ($view) {
-        $button = 'Сохранить'?>
-        <?= $form->field($model, 'name'); ?>
-    <?php } else {
-        $button = 'ОК';
-        ?>
+        $button = 'OK'?>
         <div class="alert alert-secondary"> <?= $model->name ?> </div>
+    <?php } else {
+        $button = 'Сохранить';
+        ?>
+        <?= $form->field($model, 'name'); ?>
     <?php } ?>
         <div class="form-group">
             <?= Html::submitButton($button, ['class' => 'btn btn-primary']) ?>

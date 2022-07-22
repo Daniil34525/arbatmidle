@@ -1,13 +1,29 @@
 <?php
 /* @var $this yii\web\View
  * @var $title string
+ * @var $dataProvider \yii\data\ActiveDataProvider
  */
-$this->title = $title;
-?>
-<h1>books/index</h1>
 
-<p>
-    You may change the content of this page by modifying
-    the file <code><?= __FILE__; ?></code>.
-</p>
+use yii\grid\GridView;
+use yii\helpers\Html;
+
+$this->title = $title;
+echo Html::a('Добавление книги',['create'],['class'=>'btn btn-success']);
+echo GridView::widget([
+    'dataProvider' => $dataProvider,
+    'columns' => [
+        'id',
+        'name',
+        [
+            'attribute' => 'Author_name',
+            'value' => function($model){
+                return $model->author->name;
+            },
+        ],
+        [
+            'class' => 'yii\grid\ActionColumn',
+            'template' => '{view} {update} {delete}',
+        ],
+    ]
+]);
 

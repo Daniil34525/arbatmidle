@@ -6,8 +6,10 @@
 
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 $this->title = $title;
+echo Html::a('Добавление автора',['create'],['class'=>'btn btn-success']);
 echo GridView::widget([
     'dataProvider' => $dataProvider,
     'columns' => [
