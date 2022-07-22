@@ -2,20 +2,22 @@
 
 namespace app\controllers;
 
-use app\models\Authors;
-use app\models\AuthorsSearch;
-use app\models\BooksSearch;
 use Yii;
-use yii\data\ActiveDataProvider;
+use yii\web\Controller;
 use yii\web\Response;
 
-class AuthorsController extends BaseController
+abstract class BaseController extends Controller
 {
+    public $modelClass;
+    public $searchModelClass;
+    public $indexView;
+    public $updateView;
+
     public function actionIndex()
     {
-        $searchModel = new AuthorsSearch();
+        $searchModel = new $this->searchModelClass;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        return $this->render('index',
+        return $this->render($this->indexView,
             [
                 'title' => $this->action->id,
                 'dataProvider' => $dataProvider,
@@ -26,11 +28,11 @@ class AuthorsController extends BaseController
 
     public function actionCreate()
     {
-        $model = new Authors();
+        $model = new $this->modelClass;
         if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
-            return $this->redirect('index');
+            return $this->redirect($this->indexView);
         }
-        return $this->render('create_update_view',
+        return $this->render($this->updateView,
             [
                 'model' => $model,
                 'title' => $this->action->id,
@@ -40,11 +42,11 @@ class AuthorsController extends BaseController
 
     public function actionUpdate($id)
     {
-        $model = Authors::findOne($id);
+        $model = $this->modelClass::findOne($id);
         if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
-            return $this->redirect('index');
+            return $this->redirect($this->indexView);
         }
-        return $this->render('create_update_view',
+        return $this->render($this->updateView,
             [
                 'model' => $model,
                 'title' => $this->action->id,
@@ -54,8 +56,8 @@ class AuthorsController extends BaseController
 
     public function actionView($id): string
     {
-        $model = Authors::findOne($id);
-        return $this->render('create_update_view',
+        $model = $this->modelClass::findOne($id);
+        return $this->render($this->updateView,
             [
                 'model' => $model,
                 'title' => $this->action->id,
@@ -65,8 +67,8 @@ class AuthorsController extends BaseController
 
     public function actionDelete($id): Response
     {
-        $model = Authors::findOne($id);
+        $model = $this->modelClass::findOne($id);
         $model->delete();
-        return $this->redirect('index');
+        return $this->redirect($this->indexView);
     }
 }

@@ -13,20 +13,21 @@ use yii\widgets\ActiveForm;
 $this->title = $title;
 ?>
 <div class="authors-create_update_view">
-
-    <?php $form = ActiveForm::begin(); ?>
-
+    <?php $this->title = $title;
+    $form = ActiveForm::begin(); ?>
     <?php if ($view) {
-        $button = 'OK'?>
+        $button = 'Ок'?>
         <div class="alert alert-secondary"> <?= $model->name ?> </div>
+        <a class="btn btn-success" href="index"><?= $button ?></a>
     <?php } else {
         $button = 'Сохранить';
         ?>
         <?= $form->field($model, 'name'); ?>
-    <?php } ?>
         <div class="form-group">
             <?= Html::submitButton($button, ['class' => 'btn btn-primary']) ?>
         </div>
+    <?php } ?>
+
     <?php ActiveForm::end(); ?>
 
 </div><!-- authors-create_update_view -->

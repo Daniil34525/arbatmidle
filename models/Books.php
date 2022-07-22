@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "books".
@@ -11,9 +13,9 @@ use Yii;
  * @property int $author_id
  * @property string $name
  *
- * @property Authors $author
+ * @property Authors $authors;
  */
-class Books extends \yii\db\ActiveRecord
+class Books extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -51,10 +53,10 @@ class Books extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Author]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getAuthor()
     {
-        return $this->hasOne(Authors::className(), ['id' => 'author_id']);
+        return $this->hasOne(Authors::class, ['id' => 'author_id']);
     }
 }

@@ -4,18 +4,24 @@ namespace app\controllers;
 
 use app\models\Authors;
 use app\models\Books;
+use app\models\BooksSearch;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 
 class BooksController extends Controller
 {
-    public function actionIndex()
+    public function actionIndex(): string
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Books::find(),
-        ]);
-        return $this->render('index', ['title' => $this->action->id, 'dataProvider' => $dataProvider]);
+        $searchModel = new BooksSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('index',
+            [
+                'title' => $this->action->id,
+                'dataProvider' => $dataProvider,
+                'searchModel' => $searchModel
+            ]
+        );
     }
 
     public function actionCreate($id = null)
